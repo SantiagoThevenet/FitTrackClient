@@ -1,13 +1,18 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom"
 function RegisterPage() {
   const {
     register,
     handleSubmit
   } = useForm();
   
-  const {registerAuth} = useAuth()
+  const {registerAuth, isAuthenticated} = useAuth()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (isAuthenticated) navigate('/')
+  }, [isAuthenticated])
 
   const onSubmit = handleSubmit((data) => {
     registerAuth(data)
