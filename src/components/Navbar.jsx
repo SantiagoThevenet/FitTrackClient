@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <section className="flex absolute top-0 w-screen justify-between py-8 px-14 text-gray-50">
+    <section className="flex w-screen justify-between py-8 px-72 text-gray-50">
       <Link to="/">
         <h1 className="text-3xl font-bold">Fit Track</h1>
       </Link>

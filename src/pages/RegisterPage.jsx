@@ -11,14 +11,14 @@ function RegisterPage() {
   const {registerAuth, isAuthenticated} = useAuth()
   const navigate = useNavigate()
   useEffect(() => {
-    if (isAuthenticated) navigate('/')
+    if (isAuthenticated) navigate('/tasks')
   }, [isAuthenticated])
 
   const onSubmit = handleSubmit((data) => {
     registerAuth(data)
   })
   return (
-    <div className="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-gray-900">
+    <div className="flex h-[85vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-black">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-50">
           Sign up to your account

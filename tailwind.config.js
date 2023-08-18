@@ -6,9 +6,6 @@ export default {
   ],
   theme: {
     extend: {
-      backgroundImage:{
-        'landing-page': "url('./src/img/landing.gif')",
-      }
     },
   },
   plugins: [],

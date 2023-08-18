@@ -17,11 +17,11 @@ function LoginPage() {
   })
   useEffect(() => {
     console.log(isAuthenticated,123)
-    if (isAuthenticated) navigate("/")
+    if (isAuthenticated) navigate("/tasks")
   }, [isAuthenticated])
 
   return (
-    <div className="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-gray-900">
+    <div className="flex h-[85vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-black">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-50">
           Sign in to your account
