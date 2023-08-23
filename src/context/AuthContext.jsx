@@ -14,13 +14,13 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const loginAuth = async (user) => {
     try {
-      console.log("Ver user =>:", user);
       const res = await loginRequest(user);
-      console.log(res)
       setIsAuthenticated(true);
+      setUser(res.data)
     } catch (error) {
       console.error(error);
     }
@@ -28,12 +28,18 @@ export const AuthProvider = ({ children }) => {
   const registerAuth = async (user) => {
     try {
       const res = await regisetRequest(user);
-      console.log(res)
       setIsAuthenticated(true);
+      setUser(res.data)
     } catch (error) {
       console.error(error);
     }
   };
+
+  const logout = () => {
+    Cookies.remove("token")
+    setIsAuthenticated(false)
+    setUser(false)
+  }
 
   useEffect(() => {
     async function checkLogin() {
@@ -48,6 +54,7 @@ export const AuthProvider = ({ children }) => {
           return;
         }
         setIsAuthenticated(true);
+        setUser(res.data)
       } catch (error) {
         setIsAuthenticated(false);
       }
@@ -60,7 +67,9 @@ export const AuthProvider = ({ children }) => {
       value={{
         loginAuth,
         registerAuth,
+        user,
         isAuthenticated,
+        logout
       }}
     >
       {children}

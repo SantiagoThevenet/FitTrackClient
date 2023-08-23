@@ -5,6 +5,7 @@ import { AuthProvider } from "./context/AuthContext";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import TaskPage from "./pages/TaskPage";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/tasks" element={<TaskPage />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/tasks" element={<TaskPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
