@@ -15,7 +15,6 @@ function TaskPage() {
   const [selectedExerciseDayId, setSelectedExerciseDayId] = useState(0);
   const [settingSetId, setSettingSetId] = useState(0);
   const [exerciseBaseId, setExerciseBaseId] = useState([]);
-
   const [exercices, setExercices] = useState([]);
 
   useEffect(() => {
@@ -112,20 +111,20 @@ function TaskPage() {
                       <div className="flex justify-between">
                         <span className="font-semibold">1 Serie</span>
                         <div className="flex gap-4 items-center">
-                          <span>5-7 REPS</span>
-                          <span>2 RIR</span>
+                          <span>{exercice.reps} REPS</span>
+                          <span>{exercice.rir} RIR</span>
                           <ButtonThreDots />
                         </div>
                       </div>
                       <section>
-                        <h3 className="font-light text-sm">{exercice}</h3>
+                        <h3 className="font-light text-sm">{exercice.name}</h3>
                       </section>
                     </>
                   }
                 </li>
               ))
             ) : (
-              <CircleLoading/>
+              <CircleLoading />
             )}
             <div className="flex justify-end gap-x-6 py-5">
               <button className="rounded-lg bg-gray-600 text-white py-2 px-6 flex font-medium hover:bg-gray-500">
