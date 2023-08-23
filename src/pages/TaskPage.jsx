@@ -10,7 +10,8 @@ import {
 } from "../api/wgerApi.js";
 
 function TaskPage() {
-  const [workouts, setWorkouts] = useState([]);
+  const [exerciseDays, setExerciseDays] = useState([]);
+  const [exerciceSelected, setExerciceSelected] = useState(0);
   const [selectedWorkoutId, setSelectedWorkoutId] = useState(0);
   const [selectedExerciseDayId, setSelectedExerciseDayId] = useState(0);
   const [settingSetId, setSettingSetId] = useState(0);
@@ -20,7 +21,7 @@ function TaskPage() {
   useEffect(() => {
     fetchWorkouts()
       .then(({ data }) => {
-        setWorkouts(data.results);
+        setExerciseDays(data.results);
         setSelectedWorkoutId(data.results[0].id);
       })
       .catch((error) => {
@@ -32,18 +33,20 @@ function TaskPage() {
     if (selectedWorkoutId) {
       fetchExerciseDays(selectedWorkoutId)
         .then(({ data }) => {
-          setSelectedExerciseDayId(data.results[0].id);
+          setExerciseDays(data.results);
+          setSelectedExerciseDayId(data.results[exerciceSelected].id);
         })
         .catch((error) => {
           console.error("Error fetching exercise days:", error);
         });
     }
-  }, [selectedWorkoutId]);
+  }, [selectedWorkoutId, exerciceSelected]);
 
   useEffect(() => {
     if (selectedExerciseDayId) {
       fetchSets(selectedExerciseDayId)
         .then(({ data }) => {
+          // console.log(data) // TODO: CAMBIAR LOS EJERCICIOS QUE SE MUESTRAN EN PANTALLA EN FUNCION DE LA RUTINA SELECCIONADA
           setSettingSetId(data.results);
         })
         .catch((error) => {
@@ -75,22 +78,24 @@ function TaskPage() {
         });
     }
   }, [exerciseBaseId]);
-
+  function changeRoutine(index) {    
+    setExerciceSelected(index)
+  }
   return (
     <section className="flex justify-center items-center bg-landing-page bg-black-gradient h-[85vh] bg-left-top bg-cover text-gray-800 px-72 ">
       <div className="h-3/4 w-full flex gap-2">
-        <section className="w-1/5">
+        <section className="w-1/4">
           <h1 className="font-bold text-gray-800">TUS RUTINAS</h1>
           <div className="h-3/4 backdrop-blur-3xl rounded-3xl flex flex-col p-4 border shadow-md">
-            {workouts.length > 0 ? (
-              workouts.map((workout, index) => (
-                <section key={index} className="flex justify-center py-5">
-                  <h2 className="cursor-pointer">{workout.name}</h2>
+            {exerciseDays.length > 0 ? (
+              exerciseDays.map((workout, index) => (
+                <section onClick={() => changeRoutine(index)}  key={index} className="flex justify-center py-5">
+                  <h2 className="cursor-pointer">{workout.description}</h2>
                 </section>
               ))
             ) : (
               <section className="flex justify-center py-5">
-                <h2 className="cursor-pointer">No hay rutia</h2>
+                <h2 className="cursor-pointer">No hay rutina</h2>
               </section>
             )}
             <div className="flex justify-center py-5">
