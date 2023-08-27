@@ -1,11 +1,12 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoutes from "./ProtectedRoutes";
+import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import TaskPage from "./pages/TaskPage";
-import ProtectedRoutes from "./ProtectedRoutes";
+import AddExercice from "./pages/AddExercicie";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/tasks" element={<TaskPage />} />
+            <Route path="/add-exercice" element={<AddExercice />} />
           </Route>
         </Routes>
       </BrowserRouter>

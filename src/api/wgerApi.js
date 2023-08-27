@@ -47,3 +47,14 @@ export const fetchExerciseBaseInfo = async (exerciseBaseIds) => {
     const datosInfoEjercicio = await Promise.all(promesasInfoEjercicio);
     return datosInfoEjercicio;
 };
+
+
+
+export const searchExercice = async (word) => {
+    try {
+        const {data} = await axios.get(`${apiUrl}exercise/search/?language=es,en&term=${word}`, { headers });
+        return data.suggestions
+    } catch (error) {
+        console.error(`An error occurred while getting exercise with word ${word}:`, error);
+    }
+};

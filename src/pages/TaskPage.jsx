@@ -8,6 +8,7 @@ import {
   fetchSettingSets,
   fetchExerciseBaseInfo,
 } from "../api/wgerApi.js";
+import { Link } from "react-router-dom";
 
 function TaskPage() {
   const [exerciseDays, setExerciseDays] = useState([]);
@@ -46,7 +47,6 @@ function TaskPage() {
     if (selectedExerciseDayId) {
       fetchSets(selectedExerciseDayId)
         .then(({ data }) => {
-          // console.log(data) // TODO: CAMBIAR LOS EJERCICIOS QUE SE MUESTRAN EN PANTALLA EN FUNCION DE LA RUTINA SELECCIONADA
           setSettingSetId(data.results);
         })
         .catch((error) => {
@@ -107,7 +107,7 @@ function TaskPage() {
         </section>
         <section className="w-full">
           <h1 className="font-bold text-gray-800">PUSH A - 20 SERIES</h1>
-          <ul className="flex flex-col w-full h-3/4 rounded-3xl border p-4 shadow-md divide-y divide-gray-200">
+          <ul className="flex flex-col w-full h-3/4 rounded-3xl border p-4 shadow-md divide-y divide-gray-200 overflow-y-scroll">
             {exercices.length > 0 ? (
               exercices.map((exercice, index) => (
                 <li key={index} className="flex flex-col gap-x-6 py-5">
@@ -132,9 +132,9 @@ function TaskPage() {
               <CircleLoading />
             )}
             <div className="flex justify-end gap-x-6 py-5">
-              <button className="rounded-lg bg-gray-600 text-white py-2 px-6 flex font-medium hover:bg-gray-500">
+              <Link to="/add-exercice" className="rounded-lg bg-gray-600 text-white py-2 px-6 flex font-medium hover:bg-gray-500">
                 Añadir Ejercicio
-              </button>
+              </Link>
             </div>
           </ul>
         </section>
