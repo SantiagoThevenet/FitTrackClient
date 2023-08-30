@@ -78,8 +78,8 @@ function TaskPage() {
         });
     }
   }, [exerciseBaseId]);
-  function changeRoutine(index) {    
-    setExerciceSelected(index)
+  function changeRoutine(index) {
+    setExerciceSelected(index);
   }
   return (
     <section className="flex justify-center items-center bg-landing-page bg-black-gradient h-[85vh] bg-left-top bg-cover text-gray-800 px-72 ">
@@ -89,7 +89,11 @@ function TaskPage() {
           <div className="h-3/4 backdrop-blur-3xl rounded-3xl flex flex-col p-4 border shadow-md">
             {exerciseDays.length > 0 ? (
               exerciseDays.map((workout, index) => (
-                <section onClick={() => changeRoutine(index)}  key={index} className="flex justify-center py-5">
+                <section
+                  onClick={() => changeRoutine(index)}
+                  key={index}
+                  className="flex justify-center py-5"
+                >
                   <h2 className="cursor-pointer">{workout.description}</h2>
                 </section>
               ))
@@ -99,9 +103,12 @@ function TaskPage() {
               </section>
             )}
             <div className="flex justify-center py-5">
-              <button className="rounded-lg bg-gray-600 text-white py-2 px-6 flex font-medium hover:bg-gray-500">
+              <Link
+                to="/add-routine"
+                className="rounded-lg bg-gray-600 text-white py-2 px-6 flex font-medium hover:bg-gray-500"
+              >
                 Añadir Rutina
-              </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -132,7 +139,10 @@ function TaskPage() {
               <CircleLoading />
             )}
             <div className="flex justify-end gap-x-6 py-5">
-              <Link to="/add-exercice" className="rounded-lg bg-gray-600 text-white py-2 px-6 flex font-medium hover:bg-gray-500">
+              <Link
+                to="/add-exercice"
+                className="rounded-lg bg-gray-600 text-white py-2 px-6 flex font-medium hover:bg-gray-500"
+              >
                 Añadir Ejercicio
               </Link>
             </div>

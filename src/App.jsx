@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import TaskPage from "./pages/TaskPage";
 import AddExercice from "./pages/AddExercicie";
+import AddRoutine from "./pages/AddRoutine";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route element={<ProtectedRoutes />}>
             <Route path="/tasks" element={<TaskPage />} />
             <Route path="/add-exercice" element={<AddExercice />} />
+            <Route path="/add-routine" element={<AddRoutine />} />
           </Route>
         </Routes>
       </BrowserRouter>

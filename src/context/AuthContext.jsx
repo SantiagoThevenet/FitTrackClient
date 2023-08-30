@@ -16,6 +16,13 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [idExerciceDay, setIdExerciceDay] = useState(0)
+
+
+  const changeIdExerciceDay = (id) => {
+    setIdExerciceDay(id)
+  }
+
   const loginAuth = async (user) => {
     try {
       const res = await loginRequest(user);
@@ -69,7 +76,9 @@ export const AuthProvider = ({ children }) => {
         registerAuth,
         user,
         isAuthenticated,
-        logout
+        logout,
+        idExerciceDay,
+        changeIdExerciceDay
       }}
     >
       {children}
