@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { postPrueba, searchExercice } from "../api/wgerApi";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddExercicie() {
   const { register, handleSubmit } = useForm();
@@ -9,12 +10,14 @@ function AddExercicie() {
   const [postExercice, setPostExercice] = useState(null)
 
 
-  
+  const navigate = useNavigate()
+
   const onSubmit = handleSubmit((data) => {
     data.exercice = exercice
     data.base_id = postExercice.data.base_id
-    data.set = 368705
-    postPrueba(data)
+    const response = postPrueba(data)
+    console.log("response", response)
+    if (response) navigate("/tasks")
 
   });
 
@@ -82,6 +85,24 @@ function AddExercicie() {
                 type="number"
                 autoComplete="on"
                 {...register("weight", { required: true })}
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="sets"
+                className="block text-sm font-medium leading-6 text-gray-800"
+              >
+                Sets
+              </label>
+            </div>
+            <div className="mt-2">
+              <input
+                type="number"
+                autoComplete="on"
+                {...register("sets", { required: true })}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               />
             </div>

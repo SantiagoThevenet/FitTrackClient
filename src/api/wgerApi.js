@@ -74,22 +74,31 @@ export const createNewRoutine = async ({ day, description, training }) => {
     }
 }
 
-// export const postPrueba = async (data) => {
-//     try {
-//         const response = await axios.post(`${apiUrl}setting/`, {
-//             "id": 792401,
-//             "set": 180015,
-//             "exercise_base": data.base_id,
-//             "repetition_unit": 1,
-//             "reps": data.repetitions,
-//             "weight": data.weight,
-//             "weight_unit": 1,
-//             "rir": data.rir,
-//             "order": 1,
-//             "comment": ""
-//         }, { headers })
-//         return response
-//     } catch (error) {
-//         console.error(error)
-//     }
-// }
+export const postPrueba = async (data) => {
+    try {
+        const setsResponse = await axios.post(`${apiUrl}set/`,
+            {
+                "exerciseday": 180015,
+                "sets": data.sets,
+                "order": 1,
+                "comment": ""
+            }
+            , { headers })
+
+        const response = await axios.post(`${apiUrl}setting/`,
+            {
+                "set": setsResponse.data.id,
+                "exercise_base": data.base_id,
+                "repetition_unit": 1,
+                "reps": data.repetitions,
+                "weight": "100",
+                "weight_unit": 1,
+                "rir": data.rir,
+                "comment": ""
+            }
+            , { headers })
+        return response
+    } catch (error) {
+        console.error(error)
+    }
+}
