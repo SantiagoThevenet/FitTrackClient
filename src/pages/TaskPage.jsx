@@ -95,7 +95,7 @@ function TaskPage() {
     <section className="flex justify-center items-center bg-landing-page bg-black-gradient h-[85vh] bg-left-top bg-cover text-gray-800 px-72 ">
       <div className="h-3/4 w-full flex gap-2">
         <section className="w-1/4">
-          <h1 className="font-bold text-gray-800">TUS RUTINAS</h1>
+          <h1 className="font-semibold text-gray-800">Tus rutinas</h1>
           <div className="h-3/4 backdrop-blur-3xl rounded-3xl flex flex-col p-4 border shadow-md">
             {exerciseDays.length > 0 ? (
               exerciseDays.map((workout, index) => (
@@ -123,7 +123,7 @@ function TaskPage() {
           </div>
         </section>
         <section className="w-full">
-          <h1 className="font-bold text-gray-800">{workoutNameSelected}: {exercices[0]?.sets.reduce((sum, item) => sum + item,0)} SERIES</h1>
+          <h1 className="font-semibold text-gray-800">{workoutNameSelected}: {exercices[0]?.sets.reduce((sum, item) => sum + item,0)} series</h1>
           <ul className="flex flex-col w-full h-3/4 rounded-3xl border p-4 shadow-md divide-y divide-gray-200 overflow-y-scroll">
             {exercices.length > 0 ?(
               exercices.map((exercice, index) => (
