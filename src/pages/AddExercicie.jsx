@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { postPrueba, searchExercice } from "../api/wgerApi";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function AddExercicie() {
   const { register, handleSubmit } = useForm();
@@ -11,12 +11,13 @@ function AddExercicie() {
 
 
   const navigate = useNavigate()
+  const {selectedExerciseDayId} = useParams()
 
   const onSubmit = handleSubmit((data) => {
     data.exercice = exercice
     data.base_id = postExercice.data.base_id
+    data.exercieDayId = selectedExerciseDayId
     const response = postPrueba(data)
-    console.log("response", response)
     if (response) navigate("/tasks")
 
   });

@@ -18,11 +18,12 @@ function TaskPage() {
   const [settingSetId, setSettingSetId] = useState(0);
   const [exerciseBaseId, setExerciseBaseId] = useState([]);
   const [exercices, setExercices] = useState([]);
+  const [workoutNameSelected, setWorkoutNameSelected] = useState("")
+  const [contentExists, setContentExists] = useState(true)
 
   useEffect(() => {
     fetchWorkouts()
       .then(({ data }) => {
-        setExerciseDays(data.results);
         setSelectedWorkoutId(data.results[0].id);
       })
       .catch((error) => {
@@ -36,6 +37,7 @@ function TaskPage() {
         .then(({ data }) => {
           setExerciseDays(data.results);
           setSelectedExerciseDayId(data.results[exerciceSelected].id);
+          setWorkoutNameSelected(data.results[exerciceSelected].description);
         })
         .catch((error) => {
           console.error("Error fetching exercise days:", error);
@@ -47,7 +49,12 @@ function TaskPage() {
     if (selectedExerciseDayId) {
       fetchSets(selectedExerciseDayId)
         .then(({ data }) => {
-          setSettingSetId(data.results);
+          if (data.results.length > 0) {
+            console.log(123)
+            setSettingSetId(data.results);
+          }else {
+            setContentExists(false);
+          }
         })
         .catch((error) => {
           console.error("Error fetching setting set:", error);
@@ -68,9 +75,11 @@ function TaskPage() {
   }, [settingSetId]);
 
   useEffect(() => {
+    let cont = 0
     if (exerciseBaseId.length > 0) {
       fetchExerciseBaseInfo(exerciseBaseId)
-        .then((data) => {
+        .then(async (data) => {
+          data.map(i => (cont+=i.reps))
           setExercices(data);
         })
         .catch((error) => {
@@ -78,8 +87,9 @@ function TaskPage() {
         });
     }
   }, [exerciseBaseId]);
-  function changeRoutine(index) {
-    setExerciceSelected(index);
+  async function changeRoutine(index) {
+    await setExercices([])
+    await setExerciceSelected(index);
   }
   return (
     <section className="flex justify-center items-center bg-landing-page bg-black-gradient h-[85vh] bg-left-top bg-cover text-gray-800 px-72 ">
@@ -90,9 +100,9 @@ function TaskPage() {
             {exerciseDays.length > 0 ? (
               exerciseDays.map((workout, index) => (
                 <section
-                  onClick={() => changeRoutine(index)}
-                  key={index}
-                  className="flex justify-center py-5"
+                onClick={() => changeRoutine(index)}
+                key={index}
+                className="flex justify-center py-5"
                 >
                   <h2 className="cursor-pointer">{workout.description}</h2>
                 </section>
@@ -113,15 +123,15 @@ function TaskPage() {
           </div>
         </section>
         <section className="w-full">
-          <h1 className="font-bold text-gray-800">PUSH A - 20 SERIES</h1>
+          <h1 className="font-bold text-gray-800">{workoutNameSelected}: {exercices[0]?.sets.reduce((sum, item) => sum + item,0)} SERIES</h1>
           <ul className="flex flex-col w-full h-3/4 rounded-3xl border p-4 shadow-md divide-y divide-gray-200 overflow-y-scroll">
-            {exercices.length > 0 ? (
+            {exercices.length > 0 ?(
               exercices.map((exercice, index) => (
                 <li key={index} className="flex flex-col gap-x-6 py-5">
                   {
                     <>
                       <div className="flex justify-between">
-                        <span className="font-semibold">1 Serie</span>
+                        <span className="font-semibold"> Serie {exercice.sets[index]}</span>
                         <div className="flex gap-4 items-center">
                           <span>{exercice.reps} REPS</span>
                           <span>{exercice.rir} RIR</span>
@@ -135,12 +145,17 @@ function TaskPage() {
                   }
                 </li>
               ))
-            ) : (
+            ) : contentExists === true ? (
               <CircleLoading />
-            )}
+            ) : contentExists === false ?(
+              <section className="flex justify-center py-5">
+                <h2 className="cursor-pointer">No hay rutina</h2>
+              </section>
+
+            ): null}
             <div className="flex justify-end gap-x-6 py-5">
               <Link
-                to="/add-exercice"
+                to={`/add-exercice/${selectedExerciseDayId}`}
                 className="rounded-lg bg-gray-600 text-white py-2 px-6 flex font-medium hover:bg-gray-500"
               >
                 Añadir Ejercicio

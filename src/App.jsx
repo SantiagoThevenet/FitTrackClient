@@ -20,7 +20,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/tasks" element={<TaskPage />} />
-            <Route path="/add-exercice" element={<AddExercice />} />
+            <Route path="/add-exercice/:selectedExerciseDayId" element={<AddExercice />} />
             <Route path="/add-routine" element={<AddRoutine />} />
           </Route>
         </Routes>

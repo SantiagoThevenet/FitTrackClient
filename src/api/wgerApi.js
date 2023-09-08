@@ -2,21 +2,24 @@ import axios from "axios";
 
 const apiUrl = "https://wger.de/api/v2/";
 const accessToken = "d7d9235232061142c8bd021e40f90e7a8ad3ebd0";
+let setsArray = []
 
 const headers = {
     Authorization: `Token ${accessToken}`
 };
 
-export const fetchWorkouts = () => {
-    return axios.get(`${apiUrl}workout/`, { headers });
+export const fetchWorkouts = async () => {
+    return await axios.get(`${apiUrl}workout/`, { headers });
 };
 
-export const fetchExerciseDays = (workoutId) => {
-    return axios.get(`${apiUrl}day/?training=${workoutId}`, { headers });
+export const fetchExerciseDays = async (workoutId) => {
+    return await axios.get(`${apiUrl}day/?training=${workoutId}`, { headers });
 };
 
-export const fetchSets = (exerciseDayId) => {
-    return axios.get(`${apiUrl}set/?exerciseday=${exerciseDayId}`, { headers });
+export const fetchSets = async (exerciseDayId) => {
+    const response = await axios.get(`${apiUrl}set/?exerciseday=${exerciseDayId}`, { headers });
+    setsArray = response.data.results.map(i => i.sets)
+    return response
 };
 
 export const fetchSettingSets = async (settingSetIds) => {
@@ -37,10 +40,13 @@ export const fetchSettingSets = async (settingSetIds) => {
 export const fetchExerciseBaseInfo = async (exerciseBaseIds) => {
     const promesasInfoEjercicio = exerciseBaseIds.map(async (id) => {
         const { data } = await axios.get(`${apiUrl}exercisebaseinfo/${id.exercise_base}`, { headers });
+        
+        const [nameInEngish] = data.exercises.filter(i => i.language == 2)
         return {
-            name: data.exercises[0].name,
+            name: nameInEngish.name,
             reps: id.reps,
-            rir: id.rir
+            rir: id.rir,
+            sets: setsArray
         };
     });
 
@@ -52,7 +58,7 @@ export const fetchExerciseBaseInfo = async (exerciseBaseIds) => {
 
 export const searchExercice = async (word) => {
     try {
-        const { data } = await axios.get(`${apiUrl}exercise/search/?language=es,en&term=${word}`, { headers });
+        const { data } = await axios.get(`${apiUrl}exercise/search/?language=en&term=${word}`, { headers });
         return data.suggestions
     } catch (error) {
         console.error(`An error occurred while getting exercise with word ${word}:`, error);
@@ -78,20 +84,19 @@ export const postPrueba = async (data) => {
     try {
         const setsResponse = await axios.post(`${apiUrl}set/`,
             {
-                "exerciseday": 180015,
+                "exerciseday": data.exercieDayId,
                 "sets": data.sets,
                 "order": 1,
                 "comment": ""
             }
             , { headers })
-
         const response = await axios.post(`${apiUrl}setting/`,
             {
                 "set": setsResponse.data.id,
                 "exercise_base": data.base_id,
                 "repetition_unit": 1,
                 "reps": data.repetitions,
-                "weight": "100",
+                "weight": data.weight,
                 "weight_unit": 1,
                 "rir": data.rir,
                 "comment": ""
