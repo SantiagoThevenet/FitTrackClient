@@ -32,6 +32,6 @@ body {
     width: 8px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #888;
+    background-color: #504242;
     border-radius: 16px;
 }

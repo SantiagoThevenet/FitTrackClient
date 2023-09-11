@@ -94,8 +94,8 @@ function RoutinePage() {
     <section className="bgroutine flex justify-center items-center bg-landing-page bg-black-gradient h-screen text-gray-100 px-72 ">
       <div className="h-3/4 w-full flex gap-2">
         <section className="w-1/4">
-          <h1 className="font-semibold text-gray-100">Tus rutinas</h1>
-          <div className="h-3/4 backdrop-blur-3xl rounded-3xl flex flex-col p-4">
+          <h1 className="font-semibold text-gray-100">Your routines</h1>
+          <div className="h-3/4 backdrop-blur-3xl rounded-3xl flex flex-col p-4 overflow-y-scroll custom-scrollbar">
             {exerciseDays.length > 0 ? (
               exerciseDays.map((workout, index) => (
                 <section
@@ -114,9 +114,9 @@ function RoutinePage() {
             <div className="flex justify-center py-5">
               <Link
                 to="/add-routine"
-                className="rounded-lg bg-stone-950 text-stone-100 py-2 px-6 flex font-medium hover:bg-stone-800"
+                className="rounded-lg bg-stone-900 text-stone-100 py-2 px-6 flex font-medium hover:bg-stone-800"
               >
-                Añadir Rutina
+                Add Routine
               </Link>
             </div>
           </div>
@@ -124,9 +124,9 @@ function RoutinePage() {
         <section className="w-full">
           <h1 className="font-semibold text-gray-100">
             {workoutNameSelected}:{" "}
-            {exercices[0]?.sets.reduce((sum, item) => sum + item, 0)} series
+            {exercices[0]?.sets.reduce((sum, item) => sum + item, 0)} sets
           </h1>
-          <ul className="custom-scrollbar flex flex-col w-full h-3/4 rounded-3xl p-4 backdrop-blur-3xl divide-y divide-stone-700 overflow-y-scroll">
+          <ul className="flex flex-col w-full h-3/4 rounded-3xl p-4 backdrop-blur-3xl divide-y divide-stone-700 overflow-y-scroll custom-scrollbar">
             {exercices.length > 0 ? (
               exercices.map((exercice, index) => (
                 <li key={index} className="flex flex-col gap-x-6 py-5">
@@ -135,7 +135,7 @@ function RoutinePage() {
                       <div className="flex justify-between">
                         <span className="font-semibold text-stone-200">
                           {" "}
-                          Serie {exercice.sets[index]}
+                          Sets: {exercice.sets[index]}
                         </span>
                         <div className="flex gap-4 items-center">
                           <span className="text-stone-100">{exercice.reps} REPS</span>
@@ -154,7 +154,7 @@ function RoutinePage() {
               <CircleLoading />
             ) : contentExists === false ? (
               <section className="flex justify-center py-5">
-                <h2 className="cursor-pointer">No hay rutina</h2>
+                <h2 className="cursor-pointer">No hay ejercicios</h2>
               </section>
             ) : null}
             <div className="flex justify-end gap-x-6 py-5">
@@ -162,7 +162,7 @@ function RoutinePage() {
                 to={`/add-exercice/${selectedExerciseDayId}`}
                 className="rounded-lg bg-stone-700 text-stone-100 py-2 px-6 flex font-medium hover:bg-stone-800"
               >
-                Añadir Ejercicio
+                Add Exercice
               </Link>
             </div>
           </ul>

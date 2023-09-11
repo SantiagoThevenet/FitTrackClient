@@ -1,13 +1,16 @@
 import { useForm } from "react-hook-form";
 import { createNewRoutine } from "../api/wgerApi";
+import { useNavigate } from "react-router-dom";
+
 
 function AddExercicie() {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate()
 
   const onSubmit = handleSubmit((data) => {
     data.training = 333386
     createNewRoutine(data)
-
+    navigate("/routines")
   });
 
   const daysOfWeek = [
@@ -20,9 +23,9 @@ function AddExercicie() {
     { name: "Sunday", number: 7 },
   ];
   return (
-    <div className="flex h-[85vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
+    <div className="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-stone-950">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-800">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-stone-200">
           Add Routine
         </h2>
       </div>
@@ -33,7 +36,7 @@ function AddExercicie() {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="description"
-                className="block text-sm font-medium leading-6 text-gray-800"
+                className="block text-sm font-medium leading-6 text-stone-200"
               >
                 Title
               </label>
@@ -53,7 +56,7 @@ function AddExercicie() {
                 <div className="flex items-center justify-between">
                   <label
                     htmlFor="day"
-                    className="block text-sm font-medium leading-6 text-gray-800"
+                    className="block text-sm font-medium leading-6 text-stone-200"
                   >
                     {day.name}
                   </label>
@@ -71,7 +74,7 @@ function AddExercicie() {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-gray-50 shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+              className="flex w-full justify-center rounded-md bg-stone-800 px-3 py-1.5 text-sm font-semibold leading-6 text-gray-50 shadow-sm hover:bg-stone-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
             >
               Add Exercice
             </button>

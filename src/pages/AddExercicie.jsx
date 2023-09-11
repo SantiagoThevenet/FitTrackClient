@@ -36,9 +36,9 @@ function AddExercicie() {
   }
 
   return (
-    <div className="flex h-[85vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
+    <div className="flex h-screen bg-stone-950 flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-800">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-stone-200">
           Add Exercice
         </h2>
       </div>
@@ -48,7 +48,7 @@ function AddExercicie() {
           <div>
             <label
               htmlFor="exercice"
-              className="block text-sm font-medium leading-6 text-gray-800"
+              className="block text-sm font-medium leading-6 text-stone-200"
             >
               Exercice
             </label>
@@ -60,7 +60,7 @@ function AddExercicie() {
                 autoComplete="on"
                 onChange={handleChange}
                 value={exercice}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-stone-900 bg-stone-100 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               />
             </div>
             <ul className="overflow-y-scroll max-h-40 flex flex-col gap-2 ">
@@ -76,7 +76,7 @@ function AddExercicie() {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="weight"
-                className="block text-sm font-medium leading-6 text-gray-800"
+                className="block text-sm font-medium leading-6 text-stone-200"
               >
                 Weight
               </label>
@@ -86,7 +86,7 @@ function AddExercicie() {
                 type="number"
                 autoComplete="on"
                 {...register("weight", { required: true })}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-stone-900 bg-stone-100 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -94,7 +94,7 @@ function AddExercicie() {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="sets"
-                className="block text-sm font-medium leading-6 text-gray-800"
+                className="block text-sm font-medium leading-6 text-stone-200"
               >
                 Sets
               </label>
@@ -104,7 +104,7 @@ function AddExercicie() {
                 type="number"
                 autoComplete="on"
                 {...register("sets", { required: true })}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-stone-900 bg-stone-100 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -112,7 +112,7 @@ function AddExercicie() {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="repetitions"
-                className="block text-sm font-medium leading-6 text-gray-800"
+                className="block text-sm font-medium leading-6 text-stone-200"
               >
                 Repetitions
               </label>
@@ -122,7 +122,7 @@ function AddExercicie() {
                 type="number"
                 autoComplete="on"
                 {...register("repetitions", { required: true })}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-stone-900 bg-stone-100 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -130,7 +130,7 @@ function AddExercicie() {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="rir"
-                className="block text-sm font-medium leading-6 text-gray-800"
+                className="block text-sm font-medium leading-6 text-stone-200"
               >
                 RIR
               </label>
@@ -140,7 +140,7 @@ function AddExercicie() {
                 type="number"
                 autoComplete="on"
                 {...register("rir", { required: true })}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-stone-900 bg-stone-100 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -148,7 +148,7 @@ function AddExercicie() {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-gray-50 shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+              className="flex w-full justify-center rounded-md bg-stone-800 px-3 py-1.5 text-sm font-semibold leading-6 text-gray-50 shadow-sm hover:bg-stone-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
             >
               Add Exercice
             </button>
