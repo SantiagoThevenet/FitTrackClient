@@ -10,7 +10,7 @@ import {
 } from "../api/wgerApi.js";
 import { Link } from "react-router-dom";
 
-function TaskPage() {
+function RoutinePage() {
   const [exerciseDays, setExerciseDays] = useState([]);
   const [exerciceSelected, setExerciceSelected] = useState(0);
   const [selectedWorkoutId, setSelectedWorkoutId] = useState(0);
@@ -50,7 +50,7 @@ function TaskPage() {
       fetchSets(selectedExerciseDayId)
         .then(({ data }) => {
           if (data.results.length > 0) {
-            console.log(123)
+
             setSettingSetId(data.results);
           }else {
             setContentExists(false);
@@ -168,4 +168,4 @@ function TaskPage() {
   );
 }
 
-export default TaskPage;
+export default RoutinePage;

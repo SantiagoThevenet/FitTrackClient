@@ -16,7 +16,7 @@ function LoginPage() {
     loginAuth(data)
   })
   useEffect(() => {
-    if (isAuthenticated) navigate("/tasks")
+    if (isAuthenticated) navigate("/routines")
   }, [isAuthenticated])
 
   return (

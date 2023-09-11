@@ -11,7 +11,7 @@ function RegisterPage() {
   const {registerAuth, isAuthenticated} = useAuth()
   const navigate = useNavigate()
   useEffect(() => {
-    if (isAuthenticated) navigate('/tasks')
+    if (isAuthenticated) navigate('/routines')
   }, [isAuthenticated])
 
   const onSubmit = handleSubmit((data) => {

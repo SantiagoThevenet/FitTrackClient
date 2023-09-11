@@ -15,7 +15,7 @@ function Navbar() {
               WELCOME {user.username.toUpperCase()}
             </li>
             <li className="font-light text-sm">
-              <Link to="/tasks">ROUTINES</Link>
+              <Link to="/routines">ROUTINES</Link>
             </li>
             <li className="font-light text-sm" onClick={logout}>
               LOGOUT

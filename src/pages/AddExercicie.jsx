@@ -18,7 +18,7 @@ function AddExercicie() {
     data.base_id = postExercice.data.base_id
     data.exercieDayId = selectedExerciseDayId
     const response = postPrueba(data)
-    if (response) navigate("/tasks")
+    if (response) navigate("/routines")
 
   });
 
