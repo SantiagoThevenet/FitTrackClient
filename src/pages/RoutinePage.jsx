@@ -18,8 +18,8 @@ function RoutinePage() {
   const [settingSetId, setSettingSetId] = useState(0);
   const [exerciseBaseId, setExerciseBaseId] = useState([]);
   const [exercices, setExercices] = useState([]);
-  const [workoutNameSelected, setWorkoutNameSelected] = useState("")
-  const [contentExists, setContentExists] = useState(true)
+  const [workoutNameSelected, setWorkoutNameSelected] = useState("");
+  const [contentExists, setContentExists] = useState(true);
 
   useEffect(() => {
     fetchWorkouts()
@@ -50,9 +50,8 @@ function RoutinePage() {
       fetchSets(selectedExerciseDayId)
         .then(({ data }) => {
           if (data.results.length > 0) {
-
             setSettingSetId(data.results);
-          }else {
+          } else {
             setContentExists(false);
           }
         })
@@ -75,11 +74,11 @@ function RoutinePage() {
   }, [settingSetId]);
 
   useEffect(() => {
-    let cont = 0
+    let cont = 0;
     if (exerciseBaseId.length > 0) {
       fetchExerciseBaseInfo(exerciseBaseId)
         .then(async (data) => {
-          data.map(i => (cont+=i.reps))
+          data.map((i) => (cont += i.reps));
           setExercices(data);
         })
         .catch((error) => {
@@ -88,23 +87,23 @@ function RoutinePage() {
     }
   }, [exerciseBaseId]);
   async function changeRoutine(index) {
-    await setExercices([])
+    await setExercices([]);
     await setExerciceSelected(index);
   }
   return (
-    <section className="flex justify-center items-center bg-landing-page bg-black-gradient h-[85vh] bg-left-top bg-cover text-gray-800 px-72 ">
+    <section className="bgroutine flex justify-center items-center bg-landing-page bg-black-gradient h-screen text-gray-100 px-72 ">
       <div className="h-3/4 w-full flex gap-2">
         <section className="w-1/4">
-          <h1 className="font-semibold text-gray-800">Tus rutinas</h1>
-          <div className="h-3/4 backdrop-blur-3xl rounded-3xl flex flex-col p-4 border shadow-md">
+          <h1 className="font-semibold text-gray-100">Tus rutinas</h1>
+          <div className="h-3/4 backdrop-blur-3xl rounded-3xl flex flex-col p-4">
             {exerciseDays.length > 0 ? (
               exerciseDays.map((workout, index) => (
                 <section
-                onClick={() => changeRoutine(index)}
-                key={index}
-                className="flex justify-center py-5"
+                  onClick={() => changeRoutine(index)}
+                  key={index}
+                  className="flex justify-center py-5"
                 >
-                  <h2 className="cursor-pointer">{workout.description}</h2>
+                  <h2 className="cursor-pointer text-stone-200">{workout.description}</h2>
                 </section>
               ))
             ) : (
@@ -115,7 +114,7 @@ function RoutinePage() {
             <div className="flex justify-center py-5">
               <Link
                 to="/add-routine"
-                className="rounded-lg bg-gray-600 text-white py-2 px-6 flex font-medium hover:bg-gray-500"
+                className="rounded-lg bg-stone-950 text-stone-100 py-2 px-6 flex font-medium hover:bg-stone-800"
               >
                 Añadir Rutina
               </Link>
@@ -123,18 +122,24 @@ function RoutinePage() {
           </div>
         </section>
         <section className="w-full">
-          <h1 className="font-semibold text-gray-800">{workoutNameSelected}: {exercices[0]?.sets.reduce((sum, item) => sum + item,0)} series</h1>
-          <ul className="flex flex-col w-full h-3/4 rounded-3xl border p-4 shadow-md divide-y divide-gray-200 overflow-y-scroll">
-            {exercices.length > 0 ?(
+          <h1 className="font-semibold text-gray-100">
+            {workoutNameSelected}:{" "}
+            {exercices[0]?.sets.reduce((sum, item) => sum + item, 0)} series
+          </h1>
+          <ul className="custom-scrollbar flex flex-col w-full h-3/4 rounded-3xl p-4 backdrop-blur-3xl divide-y divide-stone-700 overflow-y-scroll">
+            {exercices.length > 0 ? (
               exercices.map((exercice, index) => (
                 <li key={index} className="flex flex-col gap-x-6 py-5">
                   {
                     <>
                       <div className="flex justify-between">
-                        <span className="font-semibold"> Serie {exercice.sets[index]}</span>
+                        <span className="font-semibold text-stone-200">
+                          {" "}
+                          Serie {exercice.sets[index]}
+                        </span>
                         <div className="flex gap-4 items-center">
-                          <span>{exercice.reps} REPS</span>
-                          <span>{exercice.rir} RIR</span>
+                          <span className="text-stone-100">{exercice.reps} REPS</span>
+                          <span className="text-stone-100">{exercice.rir} RIR</span>
                           <ButtonThreDots />
                         </div>
                       </div>
@@ -147,16 +152,15 @@ function RoutinePage() {
               ))
             ) : contentExists === true ? (
               <CircleLoading />
-            ) : contentExists === false ?(
+            ) : contentExists === false ? (
               <section className="flex justify-center py-5">
                 <h2 className="cursor-pointer">No hay rutina</h2>
               </section>
-
-            ): null}
+            ) : null}
             <div className="flex justify-end gap-x-6 py-5">
               <Link
                 to={`/add-exercice/${selectedExerciseDayId}`}
-                className="rounded-lg bg-gray-600 text-white py-2 px-6 flex font-medium hover:bg-gray-500"
+                className="rounded-lg bg-stone-700 text-stone-100 py-2 px-6 flex font-medium hover:bg-stone-800"
               >
                 Añadir Ejercicio
               </Link>
