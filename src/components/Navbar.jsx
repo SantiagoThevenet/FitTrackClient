@@ -17,7 +17,7 @@ function Navbar() {
             <li className="font-light text-sm">
               <Link to="/routines">ROUTINES</Link>
             </li>
-            <li className="font-light text-sm" onClick={logout}>
+            <li className="font-light text-sm cursor-pointer" onClick={logout}>
               LOGOUT
             </li>
           </>

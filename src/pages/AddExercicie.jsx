@@ -63,9 +63,9 @@ function AddExercicie() {
                 className="block w-full rounded-md border-0 py-1.5 text-stone-900 bg-stone-100 pl-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               />
             </div>
-            <ul className="overflow-y-scroll max-h-40 flex flex-col gap-2 ">
+            <ul className="overflow-y-scroll max-h-40 flex flex-col gap-2 bg-stone-100 ">
               {suggestExercice.map((sugExercice, index) => (
-                <li onClick={() => selectExercice(index)} className="hover:bg-gray-300" key={index}>
+                <li onClick={() => selectExercice(index)} className="bg-stone-100 hover:bg-stone-300 cursor-pointer" key={index}>
                   {sugExercice.value}
                 </li>
               ))}
