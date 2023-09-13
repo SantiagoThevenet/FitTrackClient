@@ -1,22 +1,17 @@
-import { describe, expect, test } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import { AuthProvider } from "../context/AuthContext";
-import { BrowserRouter } from "react-router-dom";
-
+import TestRenderer from "react-test-renderer";
+import { MemoryRouter } from "react-router-dom";
 import Navbar from "./Navbar";
+
+
+
 describe("Navbar", () => {
-  test("should render icon, login and register links", () => {
-    render(
-      <AuthProvider>
-        <BrowserRouter>
-          <Navbar />
-        </BrowserRouter>
-      </AuthProvider>
-    );
+  it("should test the children inside my NavBar component", () => {
+    const navBar = TestRenderer.create(<AuthProvider><MemoryRouter><Navbar /></MemoryRouter></AuthProvider>).toJSON();
 
-    expect(screen.getByText("LOGIN")).toBeDefined();
-    expect(screen.getByText("REGISTER")).toBeDefined();
-    expect(screen.getByText("Fit Track")).toBeDefined();
-
+    expect(navBar.children[0].props.href).toBe("/")
+    expect(navBar.children[1].children[0].children[0].props.href).toBe("/login")
+    expect(navBar.children[1].children[1].children[0].props.href).toBe("/register")
   });
 });
